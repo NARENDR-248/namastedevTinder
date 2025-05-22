@@ -39,6 +39,27 @@ app.get("/feed", async (req, res) => {
 
    }
 
+
+})
+
+// deleted the user apii
+app.delete("/user",async(req,res)=>{
+   const userid=req.body.userid;
+   try{
+      const deletedUser=await User.findByIdAndDelete({_id:userid});
+      if(!deletedUser){
+         
+      return res.status(404).send("User not found");
+
+      }else{
+           res.send("user is deleted")
+
+      }
+    
+   }catch{
+      return res.status(500).send("something wrong");
+
+   }
 })
 app.patch("/user",async(req,res)=>{
    const userid=req.body.userid;
